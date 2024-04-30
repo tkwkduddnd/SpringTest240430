@@ -1,0 +1,46 @@
+package com.ezen.test.controller;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ezen.test.domain.BoardVO;
+import com.ezen.test.service.BoardService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@RequestMapping("/board/*")
+@Slf4j
+@RequiredArgsConstructor
+@Controller
+public class BoardController {
+	private BoardService bsv;
+	
+	
+    public BoardController(BoardService bsv) {
+        this.bsv = bsv;
+    }
+	
+	@GetMapping("/register")
+	public String register() {
+		return "/board/register";
+	}
+	// @RequestParam("name")String name
+	@PostMapping("/insert")
+	public String insert(BoardVO bvo) {
+		log.info(">>>> bvo >> {}", bvo);
+		
+		// BoardService 객체가 null인지 확인
+	    if (bsv == null) {
+	        // 필요한 작업을 수행하거나, 예외를 처리하는 등의 로직을 추가할 수 있습니다.
+	        log.error("BoardService is null");
+	        return "error"; // 또는 다른 적절한 응답을 반환합니다.
+	    }
+		int isOk = bsv.insert(bvo);
+		return "/";
+		
+	}
+}

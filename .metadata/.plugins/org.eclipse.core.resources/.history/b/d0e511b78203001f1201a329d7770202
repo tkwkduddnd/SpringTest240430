@@ -1,0 +1,27 @@
+package com.ezen.test.service;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.ezen.test.domain.CommentVO;
+import com.ezen.test.repository.CommentDAO;
+import com.ezen.test.repository.MemberDAO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class CommentServiceImpl implements CommentService{
+	private final CommentDAO cdao;
+
+	@Override
+	public int post(CommentVO cvo) {
+		log.info(">>> Board remove service check");
+		return cdao.getTotal(cvo);
+	}
+
+}

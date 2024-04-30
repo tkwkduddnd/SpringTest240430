@@ -1,0 +1,18 @@
+package com.ezen.test.handler;
+
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.ezen.test.domain.FileVO;
+
+public class FileHandler {
+	
+	private final String UP_DIR ="C:\\_myProject\\_java\\_fileUpload";
+
+	public List<FileVO> uploadFiles(MultipartFile[] files) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

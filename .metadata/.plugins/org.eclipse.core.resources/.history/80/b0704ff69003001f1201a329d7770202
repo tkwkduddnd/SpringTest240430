@@ -1,0 +1,85 @@
+console.log("boardDetailComment in");
+console.log(bnoVal);
+
+document.getElementById('cmtAddBtn').addEventListener('click', ()=>{
+    const cmtText = document.getElementById('cmtText').value;
+    const cmtWrtier= document.getElementById('cmtWriter').innerText;
+
+    if(cmtText == null || cmtText == ''){
+        alert("댓글을 입력하세여");
+        document.getElementById('cmtText').focus();
+        return false;
+    }
+    else{
+        let cmtData = {
+            bno : bnoVal,
+            writer : cmtWrtier,
+            content : cmtText
+        }
+        console.log(cmtData);
+        postCommentToServer(cmtData).then(result =>{
+            console.log(result);
+            if(result == '1'){
+                alert("댓글 등록 성공");
+                // 화면에 뿌리기
+
+            }
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+// 비동기 통신 restful
+// post : 데ㅣ터 객체를 컨트롤러로 보낼때 (삽입)
+// get : 조회 (생략가능)
+// put(patch) : 수정
+// delete : 삭제
+async function postCommentToServer(cmtData){
+    try {
+        const url = "/comment/post";
+        const config={
+            method:"post",
+            headers:{
+                "content-type":"application/json; charset=utf-8"
+            },
+            body:JSON.stringify(cmtData)
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text(); //isOk
+        return result;
+
+
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// 댓글 뿌리기
+function spreadCommentList(bno){
+    getCommentListFromServer(bno).then(result=>{
+        console.log(result);
+
+        
+    })
+}
+
+async function getCommentListFromServer(bno){
+    try {
+        // comment/list/306
+        const resp = await fetch("/comment/"+bno);
+        const result = await resp.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}

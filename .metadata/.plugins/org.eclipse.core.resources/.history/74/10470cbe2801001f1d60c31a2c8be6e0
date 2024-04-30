@@ -1,0 +1,7 @@
+package com.ezen.test;
+@get
+public class test {
+	private String a;
+	private String b;
+	private String c;
+}
