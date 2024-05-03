@@ -1,8 +1,0 @@
-package com.ezen.test.controller;
-
-public class test {
-	private int a;
-	private int b;
-	
-
-}

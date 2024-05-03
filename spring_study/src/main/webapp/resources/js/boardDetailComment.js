@@ -188,7 +188,7 @@ async function updateCommentToServer(cmtData){
 
 async function removeCommentFromServer(cno){
     try {
-        const url = "/comment/"+cno;
+        const url = "/comment/"+cno+"/"+bno;
         const config = {
             method: "delete"
         }
